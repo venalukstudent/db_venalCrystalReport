@@ -24,8 +24,8 @@ namespace db_venal
         private string alamat, query;
         public Form1()
         {
-            alamat = "server=localhost; database=db_mahasiswa; username=root; password=;";
-            koneksi = new MySqlConnection(alamat);
+                alamat = "server=localhost; database=db_mahasiswa; username=root; password=;";
+                koneksi = new MySqlConnection(alamat);
 
             InitializeComponent();
         }
@@ -35,11 +35,16 @@ namespace db_venal
              
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btn_login_Click(object sender, EventArgs e)
         {
             try
             {
-                query = string.Format("select * from db_logins where username = '{0}'", txt_username.Text);
+                query = string.Format("select * from db_login where username = '{0}'", txt_username.Text);
                 ds.Clear();
                 koneksi.Open();
                 perintah = new MySqlCommand(query, koneksi);
