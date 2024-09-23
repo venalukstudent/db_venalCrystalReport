@@ -68,6 +68,92 @@ namespace db_venal
             }
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtUsername.Text != "")
+                {
+                    query = string.Format("select * from db_login where username = '{0}'", txtUsername.Text);
+                    ds.Clear();
+                    koneksi.Open();
+                    perintah = new MySqlCommand(query, koneksi);
+                    adapter = new MySqlDataAdapter(perintah);
+                    perintah.ExecuteNonQuery();
+                    adapter.Fill(ds);
+                    koneksi.Close();
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow kolom in ds.Tables[0].Rows)
+                        {
+                            txtID.Text = kolom["id_pengguna"].ToString();
+                            txtPassword.Text = kolom["password"].ToString();
+                            txtNama.Text = kolom["nama_pengguna"].ToString();
+                            CBLevel.Text = kolom["level"].ToString();
+
+                        }
+                        txtUsername.Enabled = false;
+                        dataGridView1.DataSource = ds.Tables[0];
+                        btnSave.Enabled = false;
+                        btnUpdate.Enabled = true;
+                        btnDelete.Enabled = true;
+                        btnSearch.Enabled = false;
+                        btnClear.Enabled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data Tidak Ada !!");
+                        formMain_Load(null, null);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Data Yang Anda Pilih Tidak Ada !!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtPassword.Text != "" && txtNama.Text != "" && txtUsername.Text != "" && txtID.Text != "")
+                {
+
+                    query = string.Format("update db_login set password = '{0}', nama_pengguna = '{1}', level = '{2}' where id_pengguna = '{3}'", txtPassword.Text, txtNama.Text, CBLevel.Text, txtID.Text);
+
+
+                    koneksi.Open();
+                    perintah = new MySqlCommand(query, koneksi);
+                    adapter = new MySqlDataAdapter(perintah);
+                    int res = perintah.ExecuteNonQuery();
+                    koneksi.Close();
+                    if (res == 1)
+                    {
+                        MessageBox.Show("Update Data Suksess ...");
+                        formMain_Load(null, null);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Gagal Update Data . . . ");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Data Tidak lengkap !!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
         private void formMain_Load(object sender, EventArgs e)
         {
             try
