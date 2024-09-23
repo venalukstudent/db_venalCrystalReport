@@ -160,6 +160,7 @@
             this.btnUpdate.TabIndex = 12;
             this.btnUpdate.Text = "update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click_1);
             // 
             // btnDelete
             // 
@@ -169,6 +170,7 @@
             this.btnDelete.TabIndex = 13;
             this.btnDelete.Text = "delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnClear
             // 
@@ -178,6 +180,7 @@
             this.btnClear.TabIndex = 14;
             this.btnClear.Text = "clear";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnLogout
             // 
@@ -187,6 +190,7 @@
             this.btnLogout.TabIndex = 15;
             this.btnLogout.Text = "logout";
             this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // dataGridView1
             // 
